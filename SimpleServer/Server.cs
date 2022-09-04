@@ -2,28 +2,29 @@
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Collections.Generic;
 using System.Threading;
 using System.Runtime.Serialization.Formatters.Binary;
 using Packets;
-using System.Runtime.Serialization;
 
 namespace SimpleServer
 {
-    class SimpleServer
+    public class SimpleServer
     {
         private TcpListener tcpListener;
         private static List<Client> clients;
         private static BinaryFormatter formatter;
  
         public static String serverPrefix = "[Server]: ";
+        private PacketHandler.PacketHandler _packetHandler;
+
         public SimpleServer(string ipAddress, int port)
         {
-           formatter = new BinaryFormatter();
+            formatter = new BinaryFormatter();
             IPAddress address = IPAddress.Parse(ipAddress);
             tcpListener = new TcpListener(IPAddress.Parse(ipAddress), port);
             clients = new List<Client>();
+            _packetHandler = new PacketHandler.PacketHandler(clients);
         }
 
         public void Start()
@@ -38,6 +39,7 @@ namespace SimpleServer
                 Client client = new Client(socket);
                 Console.WriteLine("Adding client");
                 clients.Add(client);
+                _packetHandler.UpdateConnectedClients(clients);
                 Console.WriteLine(clients.Count);
                 Thread thread = new Thread(new ParameterizedThreadStart(ClientMethod));
                 thread.Start(client);
@@ -49,9 +51,8 @@ namespace SimpleServer
             Console.WriteLine("Listener Stopped.");
         }
 
-        private static void ClientMethod(object clientObj)
+        private void ClientMethod(object clientObj)
         {
-            
             Client client = (Client)clientObj;
 
             int noOfIncomingBytes;
@@ -64,91 +65,19 @@ namespace SimpleServer
                 Packet packet = formatter.Deserialize(memStream) as Packet;
 
                 Console.WriteLine(packet.packetType);
-
-                
                 if (packet.packetType == PacketType.DISCONNECT)
                 {
                     clients.Remove(client);
-                    HandlePacket(client, packet);
+                    _packetHandler.HandlePacket(client, packet);
                     Console.WriteLine("got here");
                     break;
                 }
-                HandlePacket(client, packet);
+                _packetHandler.HandlePacket(client, packet);
             }
             
             clients.Remove(client);
             userList();
             client.Close();
-
-        }   
-
-        private static void HandlePacket(Client client, Packet packet)
-        {
-            Console.WriteLine("Transferred to handler");
-            switch (packet.packetType)
-            {
-                case PacketType.USER:
-                    client.clientNickname = ((UserPacket)packet).nickname;
-                    client.clientStatus = ((UserPacket)packet).status;
-                    userList();
-                    break;
-                case PacketType.CHATMESSAGE:
-                    string message = ((ChatMessagePacket)packet).message;
-                    ChatMessagePacket chatMessage = new ChatMessagePacket("[" + client.clientNickname +"]: " + message);
-                    foreach (Client connectedClient in clients)
-                    {
-                        connectedClient.send(chatMessage);
-                    }
-                    break;
-                case PacketType.SERVER_MESSAGE:
-                    string servermessage = ((ServerMessagePacket)packet).message;
-                    ServerMessagePacket serverMessage = new ServerMessagePacket(serverPrefix + servermessage);
-                    foreach (Client connectedClient in clients)
-                    {
-                        connectedClient.send(serverMessage);
-                    }
-                    break;
-                case PacketType.POKE:
-                    Console.WriteLine("got poker");
-                    string pokeSender = ((PokePacket)packet).sender;
-                    string pokeRecipient = ((PokePacket)packet).recipient;
-                    foreach(Client connectedClient in clients)
-                    {
-                        if (connectedClient.clientNickname == pokeRecipient)
-                        {
-                            connectedClient.send(new PokePacket(pokeSender,pokeRecipient));
-                            Console.WriteLine(connectedClient.clientNickname);
-                        }
-                    }
-                    break;
-                case PacketType.COMMAND:
-                    switch (((CommandPacket)packet).command)
-                    {
-                        case "!roll":
-                            Random rnd = new Random();
-                            int roll = rnd.Next(1, 99);
-                            ServerMessagePacket rollres = new ServerMessagePacket(serverPrefix + client.clientNickname + " rolled: " + roll);
-                            {
-                                foreach (Client connectedClient in clients)
-                                {
-                                    connectedClient.send(rollres);
-                                }
-                            }
-                            break;
-
-                        default:
-                            break;
-                    }
-                    break;
-                case PacketType.DISCONNECT:
-                    foreach (Client c in clients)
-                    {
-                        Console.WriteLine("Sending");
-                        c.send(new ServerMessagePacket(serverPrefix + client.clientNickname + " has left the server."));
-                    }
-                    break;
-
-            }
 
         }
 
