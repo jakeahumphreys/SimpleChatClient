@@ -39,7 +39,7 @@ namespace SimpleServer
                 Console.WriteLine($"Added client {client.clientNickname} successfully.");
                 _packetHandler.UpdateConnectedClients(clients);
                 
-                Thread thread = new Thread(new ParameterizedThreadStart(ClientMethod));
+                Thread thread = new Thread(new ParameterizedThreadStart(HandlePacketFromClient));
                 thread.Start(client);
             } 
         }
@@ -49,7 +49,7 @@ namespace SimpleServer
             Console.WriteLine("Listener Stopped.");
         }
 
-        private void ClientMethod(object clientObj)
+        private void HandlePacketFromClient(object clientObj)
         {
             Client client = (Client)clientObj;
 
@@ -62,7 +62,6 @@ namespace SimpleServer
                 MemoryStream memStream = new MemoryStream(bytes);
                 Packet packet = formatter.Deserialize(memStream) as Packet;
 
-                Console.WriteLine(packet.packetType);
                 if (packet.packetType == PacketType.DISCONNECT)
                 {
                     clients.Remove(client);
