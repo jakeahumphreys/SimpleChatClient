@@ -32,7 +32,7 @@ namespace SimpleServer
                     Client client = new Client(socket);
                     _clients.Add(client);
                 
-                    Console.WriteLine($"Added client successfully.");
+                    Console.WriteLine($"Added client {client.Id} successfully.");
                     _packetHandler.UpdateConnectedClients(_clients);
                 
                     Thread thread = new Thread(new ParameterizedThreadStart(HandlePacketFromClient));

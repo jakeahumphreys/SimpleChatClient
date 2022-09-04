@@ -12,6 +12,7 @@ namespace SimpleServer
     {
        private readonly Socket _socket;
        private readonly NetworkStream _stream;
+       public Guid Id { get; }
        public string Username { get; set; }
        public string Status { get; set; }
        public BinaryReader Reader { private set; get; }
@@ -21,8 +22,8 @@ namespace SimpleServer
         
         public Client(Socket socket)
         {
+            Id = Guid.NewGuid();
             _socket = socket;
-            
             _stream = new NetworkStream(_socket);
             Reader = new BinaryReader(_stream, Encoding.UTF8);
             Writer = new BinaryWriter(_stream, Encoding.UTF8);
