@@ -61,7 +61,8 @@ namespace SimpleServer
                 }
             } 
         }
-        public void Stop()
+
+        private void Stop()
         {
             _tcpListener.Stop();
             Console.WriteLine("Listener Stopped.");
