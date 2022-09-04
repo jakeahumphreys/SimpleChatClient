@@ -21,7 +21,6 @@ namespace SimpleServer
         public SimpleServer(string ipAddress, int port)
         {
             formatter = new BinaryFormatter();
-            IPAddress address = IPAddress.Parse(ipAddress);
             tcpListener = new TcpListener(IPAddress.Parse(ipAddress), port);
             clients = new List<Client>();
             _packetHandler = new PacketHandler.PacketHandler(clients);
