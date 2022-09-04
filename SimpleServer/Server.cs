@@ -34,12 +34,12 @@ namespace SimpleServer
             while (true)
             {
                 Socket socket = tcpListener.AcceptSocket();
-                Console.WriteLine("Socket Accepted");
                 Client client = new Client(socket);
-                Console.WriteLine("Adding client");
                 clients.Add(client);
+                
+                Console.WriteLine($"Added client {client.clientNickname} successfully.");
                 _packetHandler.UpdateConnectedClients(clients);
-                Console.WriteLine(clients.Count);
+                
                 Thread thread = new Thread(new ParameterizedThreadStart(ClientMethod));
                 thread.Start(client);
             } 
