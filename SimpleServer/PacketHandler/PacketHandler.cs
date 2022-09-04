@@ -26,11 +26,11 @@ namespace SimpleServer.PacketHandler
         public void HandleForClient(Client client)
         {
             int noOfIncomingBytes;
-            while ((noOfIncomingBytes = client.reader.ReadInt32()) != 0)
+            while ((noOfIncomingBytes = client.Reader.ReadInt32()) != 0)
             {
                 Console.WriteLine(noOfIncomingBytes);
 
-                byte[] bytes = client.reader.ReadBytes(noOfIncomingBytes);
+                byte[] bytes = client.Reader.ReadBytes(noOfIncomingBytes);
                 MemoryStream memStream = new MemoryStream(bytes);
                 var formatter = new BinaryFormatter();
                 Packet packet = formatter.Deserialize(memStream) as Packet;
@@ -54,17 +54,17 @@ namespace SimpleServer.PacketHandler
             switch (packet.packetType)
             {
                 case PacketType.USER:
-                    client.clientNickname = ((UserPacket) packet).nickname;
-                    client.clientStatus = ((UserPacket) packet).status;
+                    client.Username = ((UserPacket) packet).nickname;
+                    client.Status = ((UserPacket) packet).status;
                     SendUpdatedUserList();
                     break;
                 case PacketType.CHATMESSAGE:
                     string message = ((ChatMessagePacket) packet).message;
                     ChatMessagePacket chatMessage =
-                        new ChatMessagePacket("[" + client.clientNickname + "]: " + message);
+                        new ChatMessagePacket("[" + client.Username + "]: " + message);
                     foreach (Client connectedClient in _connectedClients)
                     {
-                        connectedClient.send(chatMessage);
+                        connectedClient.SendPacket(chatMessage);
                     }
 
                     break;
@@ -73,7 +73,7 @@ namespace SimpleServer.PacketHandler
                     ServerMessagePacket serverMessage = new ServerMessagePacket(ServerPrefix + servermessage);
                     foreach (Client connectedClient in _connectedClients)
                     {
-                        connectedClient.send(serverMessage);
+                        connectedClient.SendPacket(serverMessage);
                     }
 
                     break;
@@ -83,10 +83,10 @@ namespace SimpleServer.PacketHandler
                     string pokeRecipient = ((PokePacket) packet).recipient;
                     foreach (Client connectedClient in _connectedClients)
                     {
-                        if (connectedClient.clientNickname == pokeRecipient)
+                        if (connectedClient.Username == pokeRecipient)
                         {
-                            connectedClient.send(new PokePacket(pokeSender, pokeRecipient));
-                            Console.WriteLine(connectedClient.clientNickname);
+                            connectedClient.SendPacket(new PokePacket(pokeSender, pokeRecipient));
+                            Console.WriteLine(connectedClient.Username);
                         }
                     }
 
@@ -98,11 +98,11 @@ namespace SimpleServer.PacketHandler
                             Random rnd = new Random();
                             int roll = rnd.Next(1, 99);
                             ServerMessagePacket rollres =
-                                new ServerMessagePacket(ServerPrefix + client.clientNickname + " rolled: " + roll);
+                                new ServerMessagePacket(ServerPrefix + client.Username + " rolled: " + roll);
                         {
                             foreach (Client connectedClient in _connectedClients)
                             {
-                                connectedClient.send(rollres);
+                                connectedClient.SendPacket(rollres);
                             }
                         }
                             break;
@@ -116,7 +116,7 @@ namespace SimpleServer.PacketHandler
                     foreach (Client c in _connectedClients)
                     {
                         Console.WriteLine("Sending");
-                        c.send(new ServerMessagePacket(ServerPrefix + client.clientNickname + " has left the server."));
+                        c.SendPacket(new ServerMessagePacket(ServerPrefix + client.Username + " has left the server."));
                     }
 
                     break;
@@ -129,10 +129,10 @@ namespace SimpleServer.PacketHandler
 
             foreach (Client connectedClient in _connectedClients)
             {
-                if(connectedClient.clientNickname != null)
+                if(connectedClient.Username != null)
                 {
-                    Console.WriteLine(connectedClient.clientNickname);
-                    userlist.Add(connectedClient.clientNickname + "{" + connectedClient.clientStatus + "}");
+                    Console.WriteLine(connectedClient.Username);
+                    userlist.Add(connectedClient.Username + "{" + connectedClient.Status + "}");
 
                 }
             }
@@ -140,7 +140,7 @@ namespace SimpleServer.PacketHandler
             foreach(Client connectedClient in _connectedClients)
             {
                 Console.WriteLine("Sending userlist");
-                connectedClient.send(new UserListPacket(userlist));
+                connectedClient.SendPacket(new UserListPacket(userlist));
             }
         }
     }

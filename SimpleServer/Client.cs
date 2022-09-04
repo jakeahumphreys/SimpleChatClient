@@ -1,60 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Net;
 using System.Net.Sockets;
 using Packets;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
 
 namespace SimpleServer
 {
 
     public class Client
     {
-       private Socket socket;
-       private NetworkStream stream;
+       private readonly Socket _socket;
+       private readonly NetworkStream _stream;
 
-       public String clientNickname { get; set; }
-       public String clientStatus { get; set; }
-       public BinaryReader reader { private set; get; }
-       public BinaryWriter writer { private set; get; }
-       private BinaryFormatter formatter;
+       public String Username { get; set; }
+       public String Status { get; set; }
+       public BinaryReader Reader { private set; get; }
+       public BinaryWriter Writer { private set; get; }
        
 
         
-        public Client(Socket socketin)
+        public Client(Socket socket)
         {
-            socket = socketin;
+            _socket = socket;
             
-            stream = new NetworkStream(socket);
-            formatter = new BinaryFormatter();
-            reader = new BinaryReader(stream, Encoding.UTF8);
-            writer = new BinaryWriter(stream, Encoding.UTF8);
+            _stream = new NetworkStream(_socket);
+            Reader = new BinaryReader(_stream, Encoding.UTF8);
+            Writer = new BinaryWriter(_stream, Encoding.UTF8);
 
         }
 
-        public void send(Packet spacket)
-
+        public void SendPacket(Packet packet)
         {
-            Console.WriteLine("Serializing packet");
-            MemoryStream memStream = new MemoryStream();
-            formatter.Serialize(memStream, spacket);
+            var memStream = new MemoryStream();
+            var formatter = new BinaryFormatter();
+            
+            formatter.Serialize(memStream, packet);
             byte[] buffer = memStream.GetBuffer();
-            writer.Write(buffer.Length);
-            writer.Write(buffer);
-            writer.Flush();
+            Writer.Write(buffer.Length);
+            Writer.Write(buffer);
+            Writer.Flush();
 
         }
 
         public void Close()
         {
-            writer.Write(0);
-            stream.Close();
-            socket.Close();
+            Writer.Write(0);
+            _stream.Close();
+            _socket.Close();
         }
     }
 }
