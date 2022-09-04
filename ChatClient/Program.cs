@@ -11,8 +11,12 @@ namespace SimpleClient
         static void Main(string[] args)
         {
             SimpleClient sc = new SimpleClient();
-            sc.Connect("127.0.0.1",4444);
-            sc.Run();
+            var connected = sc.Connect("127.0.0.1", 4444);
+
+            if (connected)
+                sc.Run();
+            else
+                MessageBox.Show("The Chatroom is currently closed");
         }
     }
 }
