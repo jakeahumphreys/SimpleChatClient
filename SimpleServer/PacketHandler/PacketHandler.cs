@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Packets;
 
 namespace SimpleServer.PacketHandler
@@ -21,15 +23,40 @@ namespace SimpleServer.PacketHandler
             _connectedClients = connectedClients;
         }
 
-        public void HandlePacket(Client client, Packet packet)
+        public void HandleForClient(Client client)
         {
-            Console.WriteLine("Transferred to handler");
+            int noOfIncomingBytes;
+            while ((noOfIncomingBytes = client.reader.ReadInt32()) != 0)
+            {
+                Console.WriteLine(noOfIncomingBytes);
+
+                byte[] bytes = client.reader.ReadBytes(noOfIncomingBytes);
+                MemoryStream memStream = new MemoryStream(bytes);
+                var formatter = new BinaryFormatter();
+                Packet packet = formatter.Deserialize(memStream) as Packet;
+
+                if (packet.packetType == PacketType.DISCONNECT)
+                {
+                    _connectedClients.Remove(client);
+                    HandlePacket(client, packet);
+                    break;
+                }
+                HandlePacket(client, packet);
+            }
+            
+            _connectedClients.Remove(client);
+            SendUpdatedUserList();
+            client.Close();
+        }
+
+        private void HandlePacket(Client client, Packet packet)
+        {
             switch (packet.packetType)
             {
                 case PacketType.USER:
                     client.clientNickname = ((UserPacket) packet).nickname;
                     client.clientStatus = ((UserPacket) packet).status;
-                    UserList();
+                    SendUpdatedUserList();
                     break;
                 case PacketType.CHATMESSAGE:
                     string message = ((ChatMessagePacket) packet).message;
@@ -96,7 +123,7 @@ namespace SimpleServer.PacketHandler
             }
         }
         
-        private void UserList()
+        private void SendUpdatedUserList()
         {
             List<string> userlist = new List<string>();
 

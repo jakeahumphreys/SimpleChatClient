@@ -52,49 +52,7 @@ namespace SimpleServer
         private void HandlePacketFromClient(object clientObj)
         {
             Client client = (Client)clientObj;
-
-            int noOfIncomingBytes;
-            while ((noOfIncomingBytes = client.reader.ReadInt32()) != 0)
-            {
-                Console.WriteLine(noOfIncomingBytes);
-
-                byte[] bytes = client.reader.ReadBytes(noOfIncomingBytes);
-                MemoryStream memStream = new MemoryStream(bytes);
-                Packet packet = formatter.Deserialize(memStream) as Packet;
-
-                if (packet.packetType == PacketType.DISCONNECT)
-                {
-                    clients.Remove(client);
-                    _packetHandler.HandlePacket(client, packet);
-                    break;
-                }
-                _packetHandler.HandlePacket(client, packet);
-            }
-            
-            clients.Remove(client);
-            SendUserListUpdate();
-            client.Close();
-
-        }
-
-        private static void SendUserListUpdate()
-        {
-            List<string> userlist = new List<string>();
-
-            foreach (Client connectedClient in clients)
-            {
-                if(connectedClient.clientNickname != null)
-                {
-                    Console.WriteLine(connectedClient.clientNickname);
-                    userlist.Add(connectedClient.clientNickname + "{" + connectedClient.clientStatus + "}");
-
-                }
-            }
-
-            foreach(Client connectedClient in clients)
-            {
-                connectedClient.send(new UserListPacket(userlist));
-            }
+            _packetHandler.HandleForClient(client);
         }
     }
 }
