@@ -6,13 +6,13 @@ using System.Threading;
 
 namespace SimpleServer
 {
-    public class SimpleServer
+    public class ChatService
     {
         private readonly TcpListener _tcpListener;
         private static List<Client> _clients;
         private readonly PacketHandler.PacketHandler _packetHandler;
 
-        public SimpleServer(string ipAddress, int port)
+        public ChatService(string ipAddress, int port)
         {
             _tcpListener = new TcpListener(IPAddress.Parse(ipAddress), port);
             _clients = new List<Client>();
@@ -20,10 +20,31 @@ namespace SimpleServer
         }
 
         public void Start()
-        { 
+        {
             _tcpListener.Start();
             Console.WriteLine("Listener Started.");
+            
+            var connectionHandlingThread = new Thread(HandleConnections);
+            connectionHandlingThread.Start();
 
+            while (true)
+            {
+                Console.WriteLine("Please enter a command...");
+                switch (Console.ReadLine()?.ToLower())
+                {
+                    case "exit":
+                        connectionHandlingThread.Abort();
+                        Stop();
+                        return;
+                    default:
+                        Console.WriteLine("Command not recognised.");
+                        break;
+                }
+            }
+        }
+
+        private void HandleConnections()
+        {
             while (true)
             {
                 if (_tcpListener.Pending())

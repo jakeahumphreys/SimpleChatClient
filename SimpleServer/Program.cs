@@ -10,9 +10,8 @@ namespace SimpleServer
     {
         static void Main(string[] args)
         {
-            SimpleServer server = new SimpleServer("127.0.0.1",4444);
+            ChatService server = new ChatService("127.0.0.1",4444);
             server.Start();
-            server.Stop();
         }
     }
 }
