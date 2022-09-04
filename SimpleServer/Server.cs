@@ -110,13 +110,13 @@ namespace SimpleServer
                     break;
                 case PacketType.POKE:
                     Console.WriteLine("got poker");
-                    string poker = ((PokePacket)packet).poker;
-                    string pokee = ((PokePacket)packet).pokee;
+                    string pokeSender = ((PokePacket)packet).sender;
+                    string pokeRecipient = ((PokePacket)packet).recipient;
                     foreach(Client connectedClient in clients)
                     {
-                        if (connectedClient.clientNickname == pokee)
+                        if (connectedClient.clientNickname == pokeRecipient)
                         {
-                            connectedClient.send(new PokePacket(poker,pokee));
+                            connectedClient.send(new PokePacket(pokeSender,pokeRecipient));
                             Console.WriteLine(connectedClient.clientNickname);
                         }
                     }

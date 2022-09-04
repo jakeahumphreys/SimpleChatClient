@@ -9,14 +9,13 @@ namespace Packets
     [Serializable]
     public class PokePacket : Packet
     {
-        public String poker;
-        public String pokee;
-        public PokePacket(string poker,string pokee)
+        public String sender;
+        public String recipient;
+        public PokePacket(string sender,string recipient)
         {
-            this.poker = poker;
-            this.pokee = pokee;
+            this.sender = sender;
+            this.recipient = recipient;
             this.packettype = PacketType.POKE;
-            
         }
     }
 }

@@ -88,8 +88,8 @@ namespace SimpleClient
                     break;
                 case PacketType.POKE:
                     Console.WriteLine("Recieve Poke");
-                    string poker = ((PokePacket)packet).poker;
-                    string pokee = ((PokePacket)packet).pokee;
+                    string poker = ((PokePacket)packet).sender;
+                    string pokee = ((PokePacket)packet).recipient;
                     Form2 pokeform = new Form2("Poked by: " + poker + "!");
                     pokeform.ShowDialog();
                     break;
