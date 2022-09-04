@@ -13,7 +13,7 @@ using System.Runtime.Serialization;
 namespace SimpleServer
 {
 
-    class Client
+    public class Client
     {
        private Socket socket;
        private NetworkStream stream;
