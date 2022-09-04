@@ -68,7 +68,6 @@ namespace SimpleServer
                 {
                     clients.Remove(client);
                     _packetHandler.HandlePacket(client, packet);
-                    Console.WriteLine("got here");
                     break;
                 }
                 _packetHandler.HandlePacket(client, packet);
@@ -96,7 +95,6 @@ namespace SimpleServer
 
             foreach(Client connectedClient in clients)
             {
-                Console.WriteLine("Sending userlist");
                 connectedClient.send(new UserListPacket(userlist));
             }
         }
