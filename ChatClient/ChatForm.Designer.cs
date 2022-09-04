@@ -1,6 +1,6 @@
 ﻿namespace SimpleClient
 {
-    partial class Form1
+    partial class ChatForm
     {
         /// <summary>
         /// Required designer variable.
@@ -238,8 +238,8 @@
             this.Controls.Add(this.txtInput);
             this.Name = "Form1";
             this.Text = "Chat Client";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChatForm_FormClosing);
+            this.Load += new System.EventHandler(this.ChatForm_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);

@@ -14,7 +14,7 @@ using Packets;
 
 namespace SimpleClient
 {
-    public partial class Form1 : Form
+    public partial class ChatForm : Form
     {
         delegate void UpdateChatWindowDelgate(string message);
         UpdateChatWindowDelgate _updateChatWindowDelgate;
@@ -24,7 +24,7 @@ namespace SimpleClient
 
         SimpleClient client;
         public List<String> currentUsers;
-        public Form1(SimpleClient client)
+        public ChatForm(SimpleClient client)
         {
             this.client = client;
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace SimpleClient
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void ChatForm_Load(object sender, EventArgs e)
         {
             btnSend.Enabled = false;
         }
@@ -123,7 +123,7 @@ namespace SimpleClient
             btnSend.Enabled = true;
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void ChatForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DisconnectPacket dc = new DisconnectPacket();
             client.SendMessage(dc);

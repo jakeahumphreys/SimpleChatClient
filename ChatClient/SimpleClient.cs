@@ -21,12 +21,12 @@ namespace SimpleClient
         private BinaryReader reader;
         private BinaryFormatter formatter;
         Thread GUIThread;
-        Form1 form;
+        ChatForm form;
 
        public SimpleClient()
         {
             formatter = new BinaryFormatter();
-            form = new Form1(this);
+            form = new ChatForm(this);
             tcpClient = new TcpClient();
             GUIThread = new Thread(new ThreadStart(RunChatThread));
         }
