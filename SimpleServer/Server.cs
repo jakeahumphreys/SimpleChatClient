@@ -76,12 +76,12 @@ namespace SimpleServer
             }
             
             clients.Remove(client);
-            userList();
+            SendUserListUpdate();
             client.Close();
 
         }
 
-        private static void userList()
+        private static void SendUserListUpdate()
         {
             List<string> userlist = new List<string>();
 
