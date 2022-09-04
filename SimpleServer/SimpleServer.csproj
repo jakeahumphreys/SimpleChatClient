@@ -42,10 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\ChatService.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="PacketHandler\PacketHandler.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

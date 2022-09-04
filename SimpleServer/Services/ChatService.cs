@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Collections.Generic;
 using System.Threading;
 
-namespace SimpleServer
+namespace SimpleServer.Services
 {
     public class ChatService
     {

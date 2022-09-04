@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Packets;
+﻿using SimpleServer.Services;
+
 namespace SimpleServer
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            ChatService server = new ChatService("127.0.0.1",4444);
+            var server = new ChatService("127.0.0.1",4444);
             server.Start();
         }
     }
