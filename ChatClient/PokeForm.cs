@@ -10,15 +10,15 @@ using System.Windows.Forms;
 
 namespace SimpleClient
 {
-    public partial class Form2 : Form
+    public partial class PokeForm : Form
     {
-        public Form2(string poker)
+        public PokeForm(string poker)
         {
             InitializeComponent();
             this.lblPoke.Text = poker;
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private void PokeForm_Load(object sender, EventArgs e)
         {
             Console.WriteLine("poke iniated");
         }

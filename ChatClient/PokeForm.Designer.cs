@@ -1,6 +1,6 @@
 ﻿namespace SimpleClient
 {
-    partial class Form2
+    partial class PokeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -59,9 +59,9 @@
             this.ClientSize = new System.Drawing.Size(234, 183);
             this.Controls.Add(this.lblPoke);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "Form2";
+            this.Name = "PokeForm";
             this.Text = "You\'ve been poked!";
-            this.Load += new System.EventHandler(this.Form2_Load);
+            this.Load += new System.EventHandler(this.PokeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

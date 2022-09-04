@@ -90,7 +90,7 @@ namespace SimpleClient
                     Console.WriteLine("Recieve Poke");
                     string poker = ((PokePacket)packet).sender;
                     string pokee = ((PokePacket)packet).recipient;
-                    Form2 pokeform = new Form2("Poked by: " + poker + "!");
+                    PokeForm pokeform = new PokeForm("Poked by: " + poker + "!");
                     pokeform.ShowDialog();
                     break;
                 default:
