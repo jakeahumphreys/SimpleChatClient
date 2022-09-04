@@ -113,7 +113,6 @@ namespace SimpleClient
 
         private void btnNick_Click_1(object sender, EventArgs e)
         {
-            //NickNamePacket nickname = new NickNamePacket(txtNick.Text);
             UserPacket user = new UserPacket(txtNick.Text, "Online");
             client.SendMessage(user);
             ServerMessagePacket message = new ServerMessagePacket(txtNick.Text + " has joined the chat.");
