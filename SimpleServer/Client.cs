@@ -12,9 +12,8 @@ namespace SimpleServer
     {
        private readonly Socket _socket;
        private readonly NetworkStream _stream;
-
-       public String Username { get; set; }
-       public String Status { get; set; }
+       public string Username { get; set; }
+       public string Status { get; set; }
        public BinaryReader Reader { private set; get; }
        public BinaryWriter Writer { private set; get; }
        
