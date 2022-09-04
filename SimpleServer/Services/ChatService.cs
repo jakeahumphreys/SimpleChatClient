@@ -32,6 +32,9 @@ namespace SimpleServer.Services
                 Console.WriteLine("Please enter a command...");
                 switch (Console.ReadLine()?.ToLower())
                 {
+                    case "connected":
+                        ChatServiceCommands.ListConnectedClients(_clients);
+                        break;
                     case "exit":
                         connectionHandlingThread.Abort();
                         Stop();
