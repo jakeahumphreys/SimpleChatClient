@@ -13,13 +13,11 @@ namespace SimpleServer
     {
         private TcpListener tcpListener;
         private static List<Client> clients;
-        private static BinaryFormatter formatter;
- 
+
         private PacketHandler.PacketHandler _packetHandler;
 
         public SimpleServer(string ipAddress, int port)
         {
-            formatter = new BinaryFormatter();
             tcpListener = new TcpListener(IPAddress.Parse(ipAddress), port);
             clients = new List<Client>();
             _packetHandler = new PacketHandler.PacketHandler(clients);
