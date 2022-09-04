@@ -71,8 +71,8 @@ namespace SimpleClient
 
         private void clientPacketHandle(Packet packet)
         {
-            Console.WriteLine(packet.packettype);
-            switch (packet.packettype)
+            Console.WriteLine(packet.packetType);
+            switch (packet.packetType)
             {
                 
                 case PacketType.CHATMESSAGE:

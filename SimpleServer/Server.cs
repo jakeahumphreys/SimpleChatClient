@@ -63,10 +63,10 @@ namespace SimpleServer
                 MemoryStream memStream = new MemoryStream(bytes);
                 Packet packet = formatter.Deserialize(memStream) as Packet;
 
-                Console.WriteLine(packet.packettype);
+                Console.WriteLine(packet.packetType);
 
                 
-                if (packet.packettype == PacketType.DISCONNECT)
+                if (packet.packetType == PacketType.DISCONNECT)
                 {
                     clients.Remove(client);
                     HandlePacket(client, packet);
@@ -85,7 +85,7 @@ namespace SimpleServer
         private static void HandlePacket(Client client, Packet packet)
         {
             Console.WriteLine("Transferred to handler");
-            switch (packet.packettype)
+            switch (packet.packetType)
             {
                 case PacketType.USER:
                     client.clientNickname = ((UserPacket)packet).nickname;

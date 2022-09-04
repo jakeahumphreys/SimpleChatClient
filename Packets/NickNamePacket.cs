@@ -13,7 +13,7 @@ namespace Packets
 
        public NickNamePacket(String nickname)
         {
-            this.packettype = PacketType.NICKNAME;
+            this.packetType = PacketType.NICKNAME;
             this.nickname = nickname;
         }
     }

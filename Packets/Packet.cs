@@ -9,6 +9,6 @@ namespace Packets
     [Serializable]
     public class Packet
     {
-        public PacketType packettype = PacketType.EMPTY;
+        public PacketType packetType = PacketType.EMPTY;
     }
 }

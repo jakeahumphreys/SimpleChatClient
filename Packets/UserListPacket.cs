@@ -14,7 +14,7 @@ namespace Packets
         {
            
             this.userlist = list;
-            packettype = PacketType.USERLIST;
+            packetType = PacketType.USERLIST;
         }
     }
 

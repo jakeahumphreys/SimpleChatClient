@@ -15,7 +15,7 @@ namespace Packets
         {
             this.sender = sender;
             this.recipient = recipient;
-            this.packettype = PacketType.POKE;
+            this.packetType = PacketType.POKE;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Packets
 
         public ServerMessagePacket(String message)
         {
-            this.packettype = PacketType.SERVER_MESSAGE;
+            this.packetType = PacketType.SERVER_MESSAGE;
             this.message = message;
         }
     }

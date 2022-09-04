@@ -17,7 +17,7 @@ namespace Packets
             this.nickname = nickname;
             this.status = status;
 
-            packettype = PacketType.USER;
+            packetType = PacketType.USER;
         }
     }
 }

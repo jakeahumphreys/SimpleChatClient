@@ -13,7 +13,7 @@ namespace Packets
 
         public CommandPacket(String command)
         {
-            this.packettype = PacketType.COMMAND;
+            this.packetType = PacketType.COMMAND;
             this.command = command;
         }
     }

@@ -13,7 +13,7 @@ namespace Packets
 
         public ChatMessagePacket(String message)
         {
-            this.packettype = PacketType.CHATMESSAGE;
+            this.packetType = PacketType.CHATMESSAGE;
             this.message = message;
         }
     }

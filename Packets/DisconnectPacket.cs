@@ -11,7 +11,7 @@ namespace Packets
     {
         public DisconnectPacket()
         {
-            packettype = PacketType.DISCONNECT;
+            packetType = PacketType.DISCONNECT;
         }
     }
 }
