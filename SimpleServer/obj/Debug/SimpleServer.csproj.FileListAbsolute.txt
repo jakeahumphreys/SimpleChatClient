@@ -39,3 +39,14 @@ C:\Users\Jake\OneDrive - Staffordshire University\Work\Year 2\Concurrent Network
 C:\Users\Jake\OneDrive - Staffordshire University\Work\Year 2\Concurrent Network\Software\Packets\ChatClientMultiple\SimpleServer\obj\Debug\SimpleServer.csproj.CopyComplete
 C:\Users\Jake\OneDrive - Staffordshire University\Work\Year 2\Concurrent Network\Software\Packets\ChatClientMultiple\SimpleServer\obj\Debug\SimpleServer.exe
 C:\Users\Jake\OneDrive - Staffordshire University\Work\Year 2\Concurrent Network\Software\Packets\ChatClientMultiple\SimpleServer\obj\Debug\SimpleServer.pdb
+C:\Users\jakeh\RiderProjects\SimpleChatClient\SimpleServer\bin\Debug\SimpleServer.exe.config
+C:\Users\jakeh\RiderProjects\SimpleChatClient\SimpleServer\bin\Debug\SimpleServer.exe
+C:\Users\jakeh\RiderProjects\SimpleChatClient\SimpleServer\bin\Debug\SimpleServer.pdb
+C:\Users\jakeh\RiderProjects\SimpleChatClient\SimpleServer\bin\Debug\Packets.dll
+C:\Users\jakeh\RiderProjects\SimpleChatClient\SimpleServer\bin\Debug\Packets.pdb
+C:\Users\jakeh\RiderProjects\SimpleChatClient\SimpleServer\obj\Debug\SimpleServer.csproj.AssemblyReference.cache
+C:\Users\jakeh\RiderProjects\SimpleChatClient\SimpleServer\obj\Debug\SimpleServer.csproj.SuggestedBindingRedirects.cache
+C:\Users\jakeh\RiderProjects\SimpleChatClient\SimpleServer\obj\Debug\SimpleServer.csproj.CoreCompileInputs.cache
+C:\Users\jakeh\RiderProjects\SimpleChatClient\SimpleServer\obj\Debug\SimpleServer.csproj.CopyComplete
+C:\Users\jakeh\RiderProjects\SimpleChatClient\SimpleServer\obj\Debug\SimpleServer.exe
+C:\Users\jakeh\RiderProjects\SimpleChatClient\SimpleServer\obj\Debug\SimpleServer.pdb

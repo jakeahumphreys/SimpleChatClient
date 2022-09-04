@@ -36,3 +36,18 @@ C:\Users\Jake\OneDrive - Staffordshire University\Work\Year 2\Concurrent Network
 C:\Users\Jake\OneDrive - Staffordshire University\Work\Year 2\Concurrent Network\Software\Packets\ChatClientMultiple\ChatClient\obj\Debug\SimpleClient.csproj.CopyComplete
 C:\Users\Jake\OneDrive - Staffordshire University\Work\Year 2\Concurrent Network\Software\Packets\ChatClientMultiple\ChatClient\obj\Debug\SimpleClient.exe
 C:\Users\Jake\OneDrive - Staffordshire University\Work\Year 2\Concurrent Network\Software\Packets\ChatClientMultiple\ChatClient\obj\Debug\SimpleClient.pdb
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\bin\Debug\SimpleClient.exe.config
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\bin\Debug\SimpleClient.exe
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\bin\Debug\SimpleClient.pdb
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\bin\Debug\Packets.dll
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\bin\Debug\Packets.pdb
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\obj\Debug\SimpleClient.csproj.AssemblyReference.cache
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\obj\Debug\SimpleClient.csproj.SuggestedBindingRedirects.cache
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\obj\Debug\SimpleClient.Form1.resources
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\obj\Debug\SimpleClient.Form2.resources
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\obj\Debug\SimpleClient.Properties.Resources.resources
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\obj\Debug\SimpleClient.csproj.GenerateResource.cache
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\obj\Debug\SimpleClient.csproj.CoreCompileInputs.cache
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\obj\Debug\SimpleClient.csproj.CopyComplete
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\obj\Debug\SimpleClient.exe
+C:\Users\jakeh\RiderProjects\SimpleChatClient\ChatClient\obj\Debug\SimpleClient.pdb
