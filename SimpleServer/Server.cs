@@ -26,15 +26,18 @@ namespace SimpleServer
 
             while (true)
             {
-                Socket socket = _tcpListener.AcceptSocket();
-                Client client = new Client(socket);
-                _clients.Add(client);
+                if (_tcpListener.Pending())
+                {
+                    Socket socket = _tcpListener.AcceptSocket();
+                    Client client = new Client(socket);
+                    _clients.Add(client);
                 
-                Console.WriteLine($"Added client {client.clientNickname} successfully.");
-                _packetHandler.UpdateConnectedClients(_clients);
+                    Console.WriteLine($"Added client successfully.");
+                    _packetHandler.UpdateConnectedClients(_clients);
                 
-                Thread thread = new Thread(new ParameterizedThreadStart(HandlePacketFromClient));
-                thread.Start(client);
+                    Thread thread = new Thread(new ParameterizedThreadStart(HandlePacketFromClient));
+                    thread.Start(client);
+                }
             } 
         }
         public void Stop()
