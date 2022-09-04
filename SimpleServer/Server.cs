@@ -39,8 +39,8 @@ namespace SimpleServer
                 Console.WriteLine("Adding client");
                 clients.Add(client);
                 Console.WriteLine(clients.Count);
-                Thread t = new Thread(new ParameterizedThreadStart(ClientMethod));
-                t.Start(client);
+                Thread thread = new Thread(new ParameterizedThreadStart(ClientMethod));
+                thread.Start(client);
             } 
         }
         public void Stop()
@@ -95,29 +95,29 @@ namespace SimpleServer
                 case PacketType.CHATMESSAGE:
                     string message = ((ChatMessagePacket)packet).message;
                     ChatMessagePacket chatMessage = new ChatMessagePacket("[" + client.clientNickname +"]: " + message);
-                    foreach (Client c in clients)
+                    foreach (Client connectedClient in clients)
                     {
-                        c.send(chatMessage);
+                        connectedClient.send(chatMessage);
                     }
                     break;
                 case PacketType.SERVER_MESSAGE:
                     string servermessage = ((ServerMessagePacket)packet).message;
                     ServerMessagePacket serverMessage = new ServerMessagePacket(serverPrefix + servermessage);
-                    foreach (Client c in clients)
+                    foreach (Client connectedClient in clients)
                     {
-                        c.send(serverMessage);
+                        connectedClient.send(serverMessage);
                     }
                     break;
                 case PacketType.POKE:
                     Console.WriteLine("got poker");
                     string poker = ((PokePacket)packet).poker;
                     string pokee = ((PokePacket)packet).pokee;
-                    foreach(Client c in clients)
+                    foreach(Client connectedClient in clients)
                     {
-                        if (c.clientNickname == pokee)
+                        if (connectedClient.clientNickname == pokee)
                         {
-                            c.send(new PokePacket(poker,pokee));
-                            Console.WriteLine(c.clientNickname);
+                            connectedClient.send(new PokePacket(poker,pokee));
+                            Console.WriteLine(connectedClient.clientNickname);
                         }
                     }
                     break;
@@ -129,9 +129,9 @@ namespace SimpleServer
                             int roll = rnd.Next(1, 99);
                             ServerMessagePacket rollres = new ServerMessagePacket(serverPrefix + client.clientNickname + " rolled: " + roll);
                             {
-                                foreach (Client c in clients)
+                                foreach (Client connectedClient in clients)
                                 {
-                                    c.send(rollres);
+                                    connectedClient.send(rollres);
                                 }
                             }
                             break;
@@ -156,20 +156,20 @@ namespace SimpleServer
         {
             List<string> userlist = new List<string>();
 
-            foreach (Client c in clients)
+            foreach (Client connectedClient in clients)
             {
-                if(c.clientNickname != null)
+                if(connectedClient.clientNickname != null)
                 {
-                    Console.WriteLine(c.clientNickname);
-                    userlist.Add(c.clientNickname + "{" + c.clientStatus + "}");
+                    Console.WriteLine(connectedClient.clientNickname);
+                    userlist.Add(connectedClient.clientNickname + "{" + connectedClient.clientStatus + "}");
 
                 }
             }
 
-            foreach(Client c in clients)
+            foreach(Client connectedClient in clients)
             {
                 Console.WriteLine("Sending userlist");
-                c.send(new UserListPacket(userlist));
+                connectedClient.send(new UserListPacket(userlist));
             }
         }
     }
