@@ -15,7 +15,6 @@ namespace SimpleServer
         private static List<Client> clients;
         private static BinaryFormatter formatter;
  
-        public static String serverPrefix = "[Server]: ";
         private PacketHandler.PacketHandler _packetHandler;
 
         public SimpleServer(string ipAddress, int port)
